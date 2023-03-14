@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Movie>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.IsActive == true)
+        {
+            <div class="card m-3 col-lg-4">
+
+                <h3 class="card-header">@item.Name</h3>
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                </svg>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Director): @item.Director.FirstName @item.Director.LastName</li>
+                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Category): @item.Category.Name</li>
+                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Price): @item.Price</li>
+                </ul>
+
+                <div class="card-body">
+                    <p class="card-text">
+                        @(item.Description.Length > 50 ? item.Description.Substring(0, 50) : item.Description)
+                    </p>
+                </div>
+
+                <div class="card-body d-flex justify-content-between">
+                    <a class="card-link" asp-controller="Movie" asp-action="Edit">Edit</a>
+                    <a class="card-link" asp-controller="Movie" asp-action="Details">Details</a>
+                    <a class="card-link" asp-controller="Movie" asp-action="Delete">Delete</a>
+                </div>
+
+            </div>
+        }
+
+    }
+</div>
