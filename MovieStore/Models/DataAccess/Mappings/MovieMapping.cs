@@ -22,43 +22,51 @@ namespace MovieStore.Models.DataAccess.Mappings
                 .IsUnicode(true) // It accepts Unicode characters such as chinese alphabet
                 .HasColumnOrder(2);
 
+            builder.Property(x => x.Description)
+                .HasMaxLength(250)
+                .IsUnicode(true)
+                .HasColumnOrder(3);
+
             builder.Property(x => x.CategoryId)
                 .IsRequired()
-                .HasColumnOrder(3);
+                .HasColumnOrder(4);
 
             builder.Property(x => x.DirectorId)
                 .IsRequired()
-                .HasColumnOrder(4);
+                .HasColumnOrder(5);
 
             builder.Property(x => x.ReleaseDate)
                 .IsRequired()
                 .HasColumnType("date") // Data Type is YYYY/MM/DD in the database
-                .HasColumnOrder(5);
+                .HasColumnOrder(6);
 
             builder.Property(x => x.RunningTimeMin)
-                .HasColumnOrder(6)
+                .HasColumnOrder(7)
                 .HasColumnType("smallint");
 
             builder.Property(x => x.LanguageId)
                 .IsRequired()
-                .HasColumnOrder(7);
+                .HasColumnOrder(8);
 
             builder.Property(x => x.Price)
                 .IsRequired()
                 .HasColumnType("decimal(7,2)")
-                .HasColumnOrder(8);
+                .HasColumnOrder(9);
 
             builder.Property(x => x.Stock)
                 .IsRequired()
-                .HasColumnOrder(9);
+                .HasColumnOrder(10);
 
             builder.Property(x => x.IsActive)
                 .HasDefaultValue(false) // Default value is fals. If there is no input, the value of the property will be false
-                .HasColumnOrder(10);
+                .HasColumnOrder(11);
+
+            builder.Property(x => x.ImagePath)
+                .HasColumnOrder(12);
 
             // Foreign Key Between Movie and Category
-            builder.HasOne<Category>(x=>x.Category)
-                .WithMany(x=>x.Movies)
+            builder.HasOne<Category>(x => x.Category)
+                .WithMany(x => x.Movies)
                 .HasForeignKey(x => x.CategoryId);
 
             // Foreign Key Between Movie and Director
