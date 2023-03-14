@@ -16,14 +16,14 @@ namespace MovieStore.Repository.Abstract
         /// List all <typeparamref name="Entity" />
         /// </summary>
         /// <returns></returns>
-        List<Entity> GetAll();
+        ICollection<Entity> GetAll();
 
         /// <summary>
         /// List <typeparamref name="Entity" /> acording to the expression parameter
         /// </summary>
         /// <param name="exp"></param>
         /// <returns></returns>
-        List<Entity> GetDefault(Expression<Func<Entity, bool>> exp);
+        ICollection<Entity> GetDefault(Expression<Func<Entity, bool>> exp);
 
         /// <summary>
         /// Get <typeparamref name="Entity" /> acording to Id

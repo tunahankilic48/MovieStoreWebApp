@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieStore.Models.DataAccess;
 
@@ -11,9 +12,10 @@ using MovieStore.Models.DataAccess;
 namespace MovieStore.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230314215313_ImagePathAndDescriptionAddedMovie")]
+    partial class ImagePathAndDescriptionAddedMovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
