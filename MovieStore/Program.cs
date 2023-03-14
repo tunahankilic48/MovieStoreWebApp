@@ -1,5 +1,4 @@
 using MovieStore.Models.DataAccess;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MovieDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<MovieDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Connection string will be taken from appsettings.json file
+
+builder.Services.AddSingleton<IMovieDbContext, MovieDbContext>(); // The program create MovieDbContext Object when encounter IMovieDbContext Interface
 
 var app = builder.Build();
 

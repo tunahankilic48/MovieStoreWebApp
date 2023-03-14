@@ -4,7 +4,7 @@ using MovieStore.Models.Entities;
 
 namespace MovieStore.Models.DataAccess
 {
-    public class MovieDbContext : DbContext
+    public class MovieDbContext : DbContext, IMovieDbContext
     {
         public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
         {
@@ -28,11 +28,10 @@ namespace MovieStore.Models.DataAccess
             base.OnModelCreating(modelBuilder);
         }
 
-
-
-
-
-
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
 
     }
 }
