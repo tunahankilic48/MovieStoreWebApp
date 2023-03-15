@@ -22,6 +22,9 @@ namespace MovieStore.Models.DataAccess.Mappings
                 .IsUnicode(true)
                 .HasColumnOrder(2);
 
+            builder.HasIndex(x => x.Name)
+                .IsUnique(true); //It makes unique 
+
             builder.Property(x => x.Description)
                 .IsRequired()
                 .HasMaxLength(250)

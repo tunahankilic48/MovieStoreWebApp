@@ -13,11 +13,13 @@
         <div class="form-group">
             <label asp-for="Name" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Name)</label>
             <input asp-for="Name" class="form-control" placeholder="Enter Category Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Description" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Description)</label>
             <textarea asp-for="Description" class="form-control" style="height:100px" placeholder="Enter Category Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-info mt-3">Update The Category</button>

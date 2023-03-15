@@ -1,5 +1,16 @@
 ﻿@model IEnumerable<Category>
 
+@if (TempData["success"] is not null)
+{
+    <div class="row">
+        <div class="col-lg-2 "></div>
+        <div class="alert alert-dismissible alert-success mt-3 col-lg-2 m-2" style="width:400px">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            @TempData["success"]
+        </div>
+    </div>
+}
+
 <div class="row">
     <div class="col-lg-2 "></div>
     <a class="btn btn-primary m-2 col-lg-2" asp-controller="Category" asp-action="Create">Create New Category</a>
