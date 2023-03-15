@@ -51,7 +51,7 @@ namespace MovieStore.Repository.Abstract
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        bool Delete(int Id);
+        bool Delete(int id);
         
         int Save();
     }

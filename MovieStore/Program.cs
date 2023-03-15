@@ -12,6 +12,7 @@ builder.Services.AddDbContext<MovieDbContext>(x => x.UseSqlServer(builder.Config
 
 builder.Services.AddScoped<IMovieDbContext, MovieDbContext>(); // The program create MovieDbContext Object when encounter IMovieDbContext Interface
 builder.Services.AddTransient<IMovieRepository, MovieRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
