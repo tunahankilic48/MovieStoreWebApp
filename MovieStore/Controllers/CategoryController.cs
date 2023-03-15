@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MovieStore.Models.DataAccess;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Models.Entities;
 using MovieStore.Repository.Abstract;
-using MovieStore.Repository.Concrete;
+using MovieStore.Validation;
 
 namespace MovieStore.Controllers
 {
@@ -26,6 +26,20 @@ namespace MovieStore.Controllers
         [HttpPost]
         public IActionResult Create(Category newCategory)
         {
+            CategoryValidator validator = new CategoryValidator();
+            var validationResults = validator.Validate(newCategory);
+            if (!validationResults.IsValid)
+            {
+                validationResults.AddToModelState(this.ModelState);
+                return View(newCategory);
+            }
+
+            if (_categoryRepository.GetDefault(x=>x.Name == newCategory.Name).Count > 0)
+            {
+                TempData["error"] = "The category already exist in the database.";
+                return View(newCategory);
+            }
+            TempData["success"] = "The category is added.";
             _categoryRepository.Add(newCategory);
             return RedirectToAction("index");
         }
@@ -38,6 +52,14 @@ namespace MovieStore.Controllers
         [HttpPost]
         public IActionResult Edit(Category updateCategory)
         {
+            CategoryValidator validator = new CategoryValidator();
+            var validationResults = validator.Validate(updateCategory);
+            if (!validationResults.IsValid)
+            {
+                validationResults.AddToModelState(this.ModelState);
+                return View();
+            }
+            TempData["success"] = "The category is updated.";
             _categoryRepository.Update(updateCategory);
             return RedirectToAction("index");
         }
@@ -50,6 +72,7 @@ namespace MovieStore.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            TempData["success"] = "The category is deleted.";
             _categoryRepository.Delete(id);
             return RedirectToAction("index");
         }
