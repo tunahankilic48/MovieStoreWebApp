@@ -1,0 +1,26 @@
+﻿@model Director
+
+
+<h2 class="text-ligth mt-3">New Director</h2>
+
+<form asp-controller="director" asp-action="create" method="post">
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="FirstName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.FirstName)</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter Director First Name">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.LastName)</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter Director Last Name" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BirthDate" class="form-label mt-4">@Html.DisplayNameFor(x=>x.BirthDate)</label>
+            <input type="date" asp-for="BirthDate" class="form-control" placeholder="Enter Director Birth Day" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create The Director</button>
+    </fieldset>
+</form>
+<a class="btn btn-primary mt-3" asp-controller="director" asp-action="index">Back To List</a>
