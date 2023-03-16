@@ -1,4 +1,5 @@
-﻿using MovieStore.Models.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieStore.Models.DataAccess;
 using MovieStore.Models.Entities;
 using MovieStore.Repository.Abstract;
 using System.Linq.Expressions;
@@ -37,7 +38,7 @@ namespace MovieStore.Repository.Concrete
 
         public ICollection<Director> GetDefault(Expression<Func<Director, bool>> exp)
         {
-            return _context.Directors.Where(exp).ToList();
+            return _context.Directors.Include(x=>x.DirectedMovies).Where(exp).ToList();
         }
 
         public int Save()
