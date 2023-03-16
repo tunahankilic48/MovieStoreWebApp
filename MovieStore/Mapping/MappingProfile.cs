@@ -9,6 +9,8 @@ namespace MovieStore.Mapping
         public MappingProfile()
         {
             CreateMap<Director, DirectorVM>().ReverseMap();
+            CreateMap<Starring, StarringVM>().ReverseMap();
+            
         }
     }
 }

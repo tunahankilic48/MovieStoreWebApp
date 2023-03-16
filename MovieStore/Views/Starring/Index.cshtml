@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DirectorVM>
+﻿@model IEnumerable<StarringVM>
 
 @if (TempData["success"] is not null)
 {
@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-lg-2 "></div>
-    <a class="btn btn-primary m-2 col-lg-2" asp-controller="Director" asp-action="Create">Create New Director</a>
+    <a class="btn btn-primary m-2 col-lg-2" asp-controller="Starring" asp-action="Create">Create New Starring</a>
 </div>
 <div class="row d-flex justify-content-center">
 
@@ -39,9 +39,9 @@
                         <td>@item.LastName</td>
                         <td>@item.BirthDate</td>
                         <td>
-                            <a class="btn btn-info m-2" asp-controller="Director" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
-                            <a class="btn btn-success m-2" asp-controller="Director" asp-action="Details" asp-route-Id="@item.Id">Details</a>
-                            <a class="btn btn-danger m-2" asp-controller="Director" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                            <a class="btn btn-info m-2" asp-controller="Starring" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
+                            <a class="btn btn-success m-2" asp-controller="Starring" asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                            <a class="btn btn-danger m-2" asp-controller="Starring" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

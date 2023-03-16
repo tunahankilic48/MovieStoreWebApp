@@ -21,7 +21,12 @@ namespace MovieStore.Controllers
 
         public IActionResult Index()
         {
-            return View(_repository.GetAll());
+            List<DirectorVM> directors = new List<DirectorVM>();
+            foreach (var item in _repository.GetAll())
+            {
+                directors.Add(_mapper.Map<DirectorVM>(item));
+            }
+            return View(directors);
         }
 
         public IActionResult Create()
@@ -54,7 +59,7 @@ namespace MovieStore.Controllers
             if (ModelState.IsValid)
             {
                 _repository.Update(_mapper.Map<Director>(updatedDirector));
-                TempData["success"] = "New director is updated successfully";
+                TempData["success"] = "Director is updated successfully";
                 return RedirectToAction("index");
             }
             return View(updatedDirector);
@@ -69,7 +74,7 @@ namespace MovieStore.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _repository.Delete(id);
-            TempData["success"] = "New director is deleted successfully";
+            TempData["success"] = "Director is deleted successfully";
             return RedirectToAction("index");
         }
 

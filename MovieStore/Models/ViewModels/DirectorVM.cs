@@ -14,7 +14,7 @@ namespace MovieStore.Models.ViewModels
         public string? FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name cannot be null.")]
-        [MaxLength(20, ErrorMessage = "The maximum length of last name can be 30 characters")]
+        [MaxLength(30, ErrorMessage = "The maximum length of last name can be 30 characters")]
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
 

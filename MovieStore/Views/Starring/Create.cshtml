@@ -1,0 +1,28 @@
+﻿@model StarringVM
+
+<h2 class="text-ligth mt-3">New Starring</h2>
+
+<form asp-controller="starring" asp-action="create" method="post">
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="FirstName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.FirstName)</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter Starring First Name">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.LastName)</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter Starring Last Name" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BirthDate" class="form-label mt-4">@Html.DisplayNameFor(x=>x.BirthDate)</label>
+            <input type="date" asp-for="BirthDate" class="form-control" placeholder="Enter Starring Birth Day" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create The Starring</button>
+    </fieldset>
+</form>
+<a class="btn btn-primary mt-3" asp-controller="starring" asp-action="index">Back To List</a>
