@@ -11,8 +11,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MovieDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Connection string will be taken from appsettings.json file
 
 builder.Services.AddScoped<IMovieDbContext, MovieDbContext>(); // The program create MovieDbContext Object when encounter IMovieDbContext Interface
-builder.Services.AddTransient<IMovieRepository, MovieRepository>();
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+
+builder.Services.AddTransient<IMovieRepository, MovieRepository>()
+                .AddTransient<ICategoryRepository, CategoryRepository>()
+                .AddTransient<IDirectorRepository, DirectorRepository>();
+
+
 
 var app = builder.Build();
 
