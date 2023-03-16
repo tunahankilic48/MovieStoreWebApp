@@ -1,9 +1,9 @@
-﻿@model DirectorVM
+﻿@model StarringVM
 
 
-<h2 class="text-ligth mt-3">Delete Director</h2>
+<h2 class="text-ligth mt-3">Delete Starring</h2>
 
-<form asp-controller="director" asp-action="Delete" method="post">
+<form asp-controller="Starring" asp-action="Delete" method="post">
     <fieldset>
         <input asp-for="Id" type="hidden" />
         <div class="form-group">
@@ -26,7 +26,7 @@
             <input type="date" asp-for="BirthDate" class="form-control" disabled />
         </div>
 
-        <button type="submit" class="btn btn-danger mt-3">Delete The Director</button>
+        <button type="submit" class="btn btn-danger mt-3">Delete The Starring</button>
     </fieldset>
 </form>
-<a class="btn btn-primary mt-3" asp-controller="director" asp-action="index">Back To List</a>
+<a class="btn btn-primary mt-3" asp-controller="Starring" asp-action="index">Back To List</a>
