@@ -32,7 +32,7 @@ namespace MovieStore.Repository.Concrete
 
         public Director GetById(int id)
         {
-            return _context.Directors.Find(id);
+            return _context.Directors.Include(x => x.DirectedMovies).FirstOrDefault(x => x.Id == id);
 
         }
 

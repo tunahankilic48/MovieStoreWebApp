@@ -1,4 +1,4 @@
-﻿@model Director
+﻿@model DirectorVM
 
 
 <h2 class="text-ligth mt-3">Update Director</h2>
@@ -14,16 +14,19 @@
         <div class="form-group">
             <label asp-for="FirstName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.FirstName)</label>
             <input asp-for="FirstName" class="form-control" placeholder="Enter Director First Name">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="LastName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.LastName)</label>
             <input asp-for="LastName" class="form-control" placeholder="Enter Director Last Name" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="BirthDate" class="form-label mt-4">@Html.DisplayNameFor(x=>x.BirthDate)</label>
             <input type="date" asp-for="BirthDate" class="form-control" placeholder="Enter Director Birth Day" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Update The Director</button>
