@@ -1,6 +1,8 @@
-﻿using FluentValidation.AspNetCore;
+﻿using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using MovieStore.Models.Entities;
+using MovieStore.Models.ViewModels;
 using MovieStore.Repository.Abstract;
 using MovieStore.Validation;
 
@@ -8,14 +10,20 @@ namespace MovieStore.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
         public CategoryController(ICategoryRepository categoryRepository)
         {
-            _categoryRepository = categoryRepository;
+            _repository = categoryRepository;
         }
         public IActionResult Index()
         {
-            return View(_categoryRepository.GetAll());
+            List<CategoryVM> categories = new List<CategoryVM>();
+            foreach (var item in _repository.GetAll())
+            {
+                categories.Add(_mapper.Map<CategoryVM>(item));
+            }
+            return View(categories);
         }
 
         public IActionResult Create()
@@ -24,33 +32,33 @@ namespace MovieStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category newCategory)
+        public IActionResult Create(CategoryVM model)
         {
             CategoryValidator validator = new CategoryValidator();
-            var validationResults = validator.Validate(newCategory);
+            var validationResults = validator.Validate(model);
             if (!validationResults.IsValid)
             {
                 validationResults.AddToModelState(this.ModelState);
-                return View(newCategory);
+                return View(model);
             }
-
-            if (_categoryRepository.GetDefault(x=>x.Name == newCategory.Name).Count > 0)
+            var newCategory = _mapper.Map<Category>(model);
+            if (_repository.GetDefault(x=>x.Name == newCategory.Name).Count > 0)
             {
                 TempData["error"] = "The category already exist in the database.";
                 return View(newCategory);
             }
             TempData["success"] = "The category is added.";
-            _categoryRepository.Add(newCategory);
+            _repository.Add(newCategory);
             return RedirectToAction("index");
         }
 
         public IActionResult Edit(int id)
         {
-            return View(_categoryRepository.GetById(id));
+            return View(_mapper.Map<CategoryVM>(_repository.GetById(id)));
         }
 
         [HttpPost]
-        public IActionResult Edit(Category updateCategory)
+        public IActionResult Edit(CategoryVM updateCategory)
         {
             CategoryValidator validator = new CategoryValidator();
             var validationResults = validator.Validate(updateCategory);
@@ -60,25 +68,25 @@ namespace MovieStore.Controllers
                 return View();
             }
             TempData["success"] = "The category is updated.";
-            _categoryRepository.Update(updateCategory);
+            _repository.Update(_mapper.Map<Category>(updateCategory));
             return RedirectToAction("index");
         }
 
         public IActionResult Delete(int id)
         {
-            return View(_categoryRepository.GetById(id));
+            return View(_mapper.Map<CategoryVM>(_repository.GetById(id)));
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            _repository.Delete(id);
             TempData["success"] = "The category is deleted.";
-            _categoryRepository.Delete(id);
             return RedirectToAction("index");
         }
         public IActionResult Details(int id)
         {
-            return View(_categoryRepository.GetById(id));
+            return View(_mapper.Map<CategoryVM>(_repository.GetById(id)));
         }
     }
 }
