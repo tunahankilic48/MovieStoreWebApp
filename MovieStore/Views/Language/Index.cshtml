@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LanguageVM>
+
+@if (TempData["success"] is not null)
+{
+    <div class="row">
+        <div class="col-lg-2 "></div>
+        <div class="alert alert-dismissible alert-success mt-3 col-lg-2 m-2" style="width:400px">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            @TempData["success"]
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-2 "></div>
+    <a class="btn btn-primary m-2 col-lg-2" asp-controller="Language" asp-action="Create">Create New Language</a>
+</div>
+<div class="row d-flex justify-content-center">
+
+    <div class="col-lg-8 ">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="table-warning text-center">
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Id)</th>
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Name)</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr class="table-primary text-center align-middle">
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <a class="btn btn-danger m-2" asp-controller="language" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
