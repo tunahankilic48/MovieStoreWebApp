@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using MovieStore.Models.Entities;
+using MovieStore.Models.ViewModels;
 
 namespace MovieStore.Validation
 {
-    public class CategoryValidator : AbstractValidator<Category>
+    public class CategoryValidator : AbstractValidator<CategoryVM>
     {
         public CategoryValidator()
         {

@@ -10,6 +10,7 @@ namespace MovieStore.Mapping
         {
             CreateMap<Director, DirectorVM>().ReverseMap();
             CreateMap<Starring, StarringVM>().ReverseMap();
+            CreateMap<Category, CategoryVM>().ReverseMap();
             
         }
     }
