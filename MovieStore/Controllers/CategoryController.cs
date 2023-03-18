@@ -12,9 +12,10 @@ namespace MovieStore.Controllers
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
         {
             _repository = categoryRepository;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {

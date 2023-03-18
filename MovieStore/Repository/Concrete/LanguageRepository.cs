@@ -50,4 +50,5 @@ namespace MovieStore.Repository.Concrete
             _context.Languages.Update(entity);
             return Save() > 0;
         }
+    }
 }

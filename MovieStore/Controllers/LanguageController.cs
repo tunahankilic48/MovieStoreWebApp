@@ -12,19 +12,20 @@ namespace MovieStore.Controllers
     {
         private readonly ILanguageRepository _repository;
         private readonly IMapper _mapper;
-        public LanguageController(ILanguageRepository categoryRepository)
+        public LanguageController(ILanguageRepository categoryRepository, IMapper mapper)
         {
             _repository = categoryRepository;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            List<LanguageVM> categories = new List<LanguageVM>();
+            List<LanguageVM> languages = new List<LanguageVM>();
             foreach (var item in _repository.GetAll())
             {
-                categories.Add(_mapper.Map<LanguageVM>(item));
+                languages.Add(_mapper.Map<LanguageVM>(item));
             }
-            return View(categories);
+            return View(languages);
         }
 
         public IActionResult Create()
