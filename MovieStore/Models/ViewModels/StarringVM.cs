@@ -19,5 +19,7 @@ namespace MovieStore.Models.ViewModels
 
         [Display(Name = "Performed Movies")]
         public List<Movie>? PerformedMovies { get; set; }
+
+        public string FullName => FirstName + " " + LastName;
     }
 }

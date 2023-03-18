@@ -15,5 +15,12 @@
 
         //Navigation Property
         public List<Movie>? DirectedMovies { get; set; }
+
+        // Not Mapped
+        public string FullName => FirstName + " " + LastName;
+
+
+
+
     }
 }

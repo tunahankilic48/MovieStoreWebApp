@@ -37,7 +37,7 @@
                         <td>@item.Id</td>
                         <td>@item.FirstName</td>
                         <td>@item.LastName</td>
-                        <td>@item.BirthDate</td>
+                        <td>@(item.BirthDate != null ? ((DateTime)(item.BirthDate)).ToShortDateString() : null)</td>
                         <td>
                             <a class="btn btn-info m-2" asp-controller="Starring" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
                             <a class="btn btn-success m-2" asp-controller="Starring" asp-action="Details" asp-route-Id="@item.Id">Details</a>

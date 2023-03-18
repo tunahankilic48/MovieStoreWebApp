@@ -33,7 +33,7 @@ namespace MovieStore.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(LanguageVM model)
         {
             if (ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace MovieStore.Controllers
             return View(_mapper.Map<LanguageVM>(_repository.GetById(id)));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             _repository.Delete(id);
