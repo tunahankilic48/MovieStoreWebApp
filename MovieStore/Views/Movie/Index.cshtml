@@ -1,40 +1,58 @@
-﻿@model IEnumerable<Movie>
+﻿@model IEnumerable<MovieVM>
 
+@if (TempData["success"] is not null)
+{
+    <div class="row">
+        <div class="col-lg-2 "></div>
+        <div class="alert alert-dismissible alert-success mt-3 col-lg-2 m-2" style="width:400px">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            @TempData["success"]
+        </div>
+    </div>
+}
 
 <div class="row">
+    <div class="col-lg-1 "></div>
+    <a class="btn btn-primary m-2 col-lg-2" asp-controller="movie" asp-action="Create">Create New Movie</a>
+</div>
+
+<div class="row d-flex justify-content-center">
     @foreach (var item in Model)
     {
-        if (item.IsActive == true)
-        {
-            <div class="card m-3 col-lg-4">
+        <div class="card m-3 col-lg-3 p-0">
 
-                <h3 class="card-header">@item.Name</h3>
+            <h3 class="card-header bg-warning">@item.Name</h3>
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
+            @if (!String.IsNullOrEmpty(item.ImagePath))
+            {
+                <img src="/Images/@item.ImagePath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Director): @item.Director.FirstName @item.Director.LastName</li>
-                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Category): @item.Category.Name</li>
-                    <li class="list-group-item">@Html.DisplayNameFor(model => model.Price): @item.Price</li>
-                </ul>
+            }
+            else
+            {
+                <img src="/Images/noImage.png" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+            }
 
-                <div class="card-body">
-                    <p class="card-text">
-                        @(item.Description.Length > 50 ? item.Description.Substring(0, 50) : item.Description)
-                    </p>
-                </div>
+            <ul class="list-group list-group-flush bg-primary">
+                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Director): @item.Director.FirstName @item.Director.LastName</li>
+                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Category): @item.Category.Name</li>
+                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Price): @item.Price</li>
+            </ul>
 
-                <div class="card-body d-flex justify-content-between">
-                    <a class="card-link" asp-controller="Movie" asp-action="Edit">Edit</a>
-                    <a class="card-link" asp-controller="Movie" asp-action="Details">Details</a>
-                    <a class="card-link" asp-controller="Movie" asp-action="Delete">Delete</a>
-                </div>
-
+            <div class="card-body bg-primary border-bottom border-warning">
+                <p class="card-text">
+                    @(item.Description.Length > 30 ? item.Description.Substring(0, 30) + "..." : item.Description)
+                </p>
             </div>
-        }
+
+            <div class="card-body d-flex justify-content-between bg-primary">
+                <a class="btn btn-info" asp-controller="Movie" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-success" asp-controller="Movie" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger" asp-controller="Movie" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+
+        </div>
+
 
     }
 </div>

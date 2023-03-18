@@ -1,0 +1,89 @@
+﻿@model MovieVM
+
+<h2 class="text-ligth mt-3">New Movie</h2>
+
+<form asp-controller="Movie" asp-action="create" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="Name" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Name)</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter Movie Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Description)</label>
+            <input asp-for="Description" class="form-control" placeholder="Enter Movie Description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CategoryId" class="form-label mt-4">@Html.DisplayNameFor(x=>x.CategoryId)</label>
+            <select asp-for="CategoryId" class="form-select" asp-items="@ViewBag.Categories">
+                <option>Please select a category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DirectorId" class="form-label mt-4">@Html.DisplayNameFor(x=>x.DirectorId)</label>
+            <select asp-for="DirectorId" class="form-select" asp-items="@ViewBag.Directors">
+                <option>Please select a director</option>
+            </select>
+            <span asp-validation-for="DirectorId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.StarringsIds)</label>
+            <select asp-for="StarringsIds" class="form-select " asp-items="@ViewBag.Starrings" multiple="">
+            </select>
+            <span asp-validation-for="StarringsIds" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ReleaseDate" class="form-label mt-4">@Html.DisplayNameFor(x=>x.ReleaseDate)</label>
+            <input type="date" asp-for="ReleaseDate" class="form-control">
+            <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RunningTimeMin" class="form-label mt-4">@Html.DisplayNameFor(x=>x.RunningTimeMin)</label>
+            <input asp-for="RunningTimeMin" class="form-control" placeholder="Enter Movie Running Time (Minutes)">
+            <span asp-validation-for="RunningTimeMin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LanguageId" class="form-label mt-4">@Html.DisplayNameFor(x=>x.LanguageId)</label>
+            <select asp-for="LanguageId" class="form-select" asp-items="@ViewBag.Languages">
+                <option>Please select a language</option>
+            </select>
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Price)</label>
+            <input type="text" asp-for="Price" class="form-control" placeholder="Enter Movie Price">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Stock" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Stock)</label>
+            <input asp-for="Stock" class="form-control" placeholder="Enter Movie Stock">
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+
+        <div class="form-check">
+            <label asp-for="IsActive" class="form-check-label mt-4">Is Movie On Sale</label>
+            <input asp-for="IsActive" class="form-check-input mt-4" type="checkbox">
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image" class="form-label mt-4">Select Image</label>
+            <input asp-for="Image" type="file" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create The Movie</button>
+    </fieldset>
+</form>
+
+<a class="btn btn-primary mt-3" asp-controller="Movie" asp-action="index">Back To List</a>

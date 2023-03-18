@@ -23,5 +23,7 @@ namespace MovieStore.Models.ViewModels
         public DateTime? BirthDate { get; set; }
         [Display(Name = "Directed Movies")]
         public List<Movie>? DirectedMovies { get; set; }
+
+        public string FullName => FirstName + " " + LastName;
     }
 }

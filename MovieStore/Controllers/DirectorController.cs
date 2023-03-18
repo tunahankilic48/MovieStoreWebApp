@@ -34,7 +34,7 @@ namespace MovieStore.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(DirectorVM newDirector)
         {
             if (ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace MovieStore.Controllers
             return View(_mapper.Map<DirectorVM>(_repository.GetById(id)));
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(DirectorVM updatedDirector)
         {
             if (ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace MovieStore.Controllers
             return View(_mapper.Map<DirectorVM>(_repository.GetById(id)));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             _repository.Delete(id);

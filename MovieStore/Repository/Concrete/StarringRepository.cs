@@ -27,7 +27,7 @@ namespace MovieStore.Repository.Concrete
 
         public ICollection<Starring> GetAll()
         {
-            return _context.Starrings.ToList();
+            return _context.Starrings.Include(x=>x.PerformedMovies).ToList();
         }
 
         public Starring GetById(int id)

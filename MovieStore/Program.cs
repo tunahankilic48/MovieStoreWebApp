@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieStore.Repository.Abstract;
 using MovieStore.Repository.Concrete;
 using System.Reflection;
-
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,7 @@ builder.Services.AddTransient<IMovieRepository, MovieRepository>()
                 .AddTransient<IStarringRepository, StarringRepository>()
                 .AddTransient<ILanguageRepository, LanguageRepository>();
 
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -34,7 +34,7 @@ namespace MovieStore.Repository.Concrete
 
         public Movie GetById(int id)
         {
-            return _context.Movies.FirstOrDefault();
+            return _context.Movies.Include(x => x.Director).Include(x => x.Category).Include(x => x.Starrings).Include(x => x.Language).FirstOrDefault(x=>x.Id == id);
         }
 
         public ICollection<Movie> GetDefault(Expression<Func<Movie, bool>> exp)
