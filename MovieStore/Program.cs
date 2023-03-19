@@ -4,6 +4,7 @@ using MovieStore.Repository.Abstract;
 using MovieStore.Repository.Concrete;
 using System.Reflection;
 using Microsoft.Extensions.FileProviders;
+using MovieStore.Models.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//Seed datalarý dbye eklemek için yazdýk
+SeedData.Seed(app);
 
 app.MapControllerRoute(
     name: "default",

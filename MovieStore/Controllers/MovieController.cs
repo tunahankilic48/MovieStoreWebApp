@@ -5,6 +5,7 @@ using Microsoft.Extensions.FileProviders;
 using MovieStore.Models.Entities;
 using MovieStore.Models.ViewModels;
 using MovieStore.Repository.Abstract;
+using MovieStore.Repository.Concrete;
 using System.Collections;
 
 namespace MovieStore.Controllers
@@ -43,8 +44,8 @@ namespace MovieStore.Controllers
         {
             ViewBag.Categories = new SelectList(_categoryRepository.GetAll(), "Id", "Name");
             ViewBag.Directors = new SelectList(_directorRepository.GetAll(), "Id", "FullName");
-            ViewBag.Languages = new SelectList(_languageRepository.GetAll(), "Id", "Name");
-            ViewBag.Starrings = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
+            ViewBag.Language = new SelectList(_languageRepository.GetAll(), "Id", "Name");
+            ViewBag.AddStarrignsIds = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
             return View();
         }
 
@@ -69,9 +70,9 @@ namespace MovieStore.Controllers
                     newMovie.ImagePath = randomImageName;
                 }
 
-                foreach (var item in model.StarringsIds)
+                foreach (var item in model.AddStarringsIds)
                 {
-                    model.Starrings.Add(_starringRepository.GetById(item));
+                    newMovie.Starrings.Add(_starringRepository.GetById(item));
                 }
 
                 _movieRepository.Add(newMovie);
@@ -82,16 +83,21 @@ namespace MovieStore.Controllers
             ViewBag.Categories = new SelectList(_categoryRepository.GetAll(), "Id", "Name");
             ViewBag.Directors = new SelectList(_directorRepository.GetAll(), "Id", "FullName");
             ViewBag.Languages = new SelectList(_languageRepository.GetAll(), "Id", "Name");
-            ViewBag.Starrings = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
+            ViewBag.AddStarrignsIds = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
             return View(model);
         }
 
         public IActionResult Edit(int id)
         {
+            var starringsThatInPlayMovie = _movieRepository.GetById(id).Starrings;
+            var starringsThatNotInPlayMovie = _starringRepository.GetAll().Except(starringsThatInPlayMovie);
+
             ViewBag.Categories = new SelectList(_categoryRepository.GetAll(), "Id", "Name");
             ViewBag.Directors = new SelectList(_directorRepository.GetAll(), "Id", "FullName");
-            ViewBag.Languages = new SelectList(_languageRepository.GetAll(), "Id", "Name");
-            ViewBag.Starrings = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
+            ViewBag.Language = new SelectList(_languageRepository.GetAll(), "Id", "Name");
+            ViewBag.DeleteStarrignsIds = new SelectList(starringsThatInPlayMovie, "Id", "FullName");
+            ViewBag.AddStarrignsIds = new SelectList(starringsThatNotInPlayMovie, "Id", "FullName");
+
             return View(_mapper.Map<MovieVM>(_movieRepository.GetById(id)));
         }
 
@@ -116,20 +122,31 @@ namespace MovieStore.Controllers
                 }
 
 
-                foreach (var item in model.StarringsIds)
+                foreach (var item in model.AddStarringsIds)
                 {
                     model.Starrings.Add(_starringRepository.GetById(item));
                 }
+                foreach (var item in model.DeleteStarringsIds)
+                {
+                    if (item != null)
+                    {
+                        model.Starrings.Remove(_starringRepository.GetById(item));
+                    }
+                }
 
                 _movieRepository.Update(_mapper.Map<Movie>(model));
-                TempData["success"] = "Movie is updated successfully";
-                return RedirectToAction("index");
+                TempData["Succes"] = "Movie is updated successfully";
+                return RedirectToAction("Index");
             }
+
+            var starringsThatInPlayMovie = _movieRepository.GetById((int)model.Id).Starrings;
+            var starringsThatNotInPlayMovie = _starringRepository.GetAll().Except(starringsThatInPlayMovie);
 
             ViewBag.Categories = new SelectList(_categoryRepository.GetAll(), "Id", "Name");
             ViewBag.Directors = new SelectList(_directorRepository.GetAll(), "Id", "FullName");
-            ViewBag.Languages = new SelectList(_languageRepository.GetAll(), "Id", "Name");
-            ViewBag.Starrings = new SelectList(_starringRepository.GetAll(), "Id", "FullName");
+            ViewBag.Language = new SelectList(_languageRepository.GetAll(), "Id", "Name");
+            ViewBag.DeleteStarrignsIds = new SelectList(starringsThatInPlayMovie, "Id", "FullName");
+            ViewBag.AddStarrignsIds = new SelectList(starringsThatNotInPlayMovie, "Id", "FullName");
             return View(model);
         }
 

@@ -41,7 +41,11 @@
 
             <div class="card-body bg-primary border-bottom border-warning">
                 <p class="card-text">
-                    @(item.Description.Length > 30 ? item.Description.Substring(0, 30) + "..." : item.Description)
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        @(item.Description.Length > 30 ? item.Description.Substring(0, 30) + "..." : item.Description)
+
+                    }
                 </p>
             </div>
 

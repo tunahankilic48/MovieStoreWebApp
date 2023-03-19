@@ -4,6 +4,20 @@
 
 <form asp-controller="Movie" asp-action="edit" method="post" enctype="multipart/form-data">
     <fieldset>
+        @if (!String.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="/Images/@Model.ImagePath" class="d-block user-select-none" width="200" height="300" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+
+        }
+        else
+        {
+            <img src="/Images/noImage.png" class="d-block user-select-none" width="200" height="300" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+        }
+        <div class="form-group">
+            <label asp-for="Image" class="form-label mt-4">Select Image</label>
+            <input asp-for="Image" type="file" class="form-control">
+        </div>
+
         <input asp-for="Id" type="hidden" />
         <input asp-for="ImagePath" type="hidden" />
         <div class="form-group">
@@ -37,19 +51,19 @@
 
 
         <div class="form-group">
-            <label asp-for="StarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.StarringsIds)</label>
-            <select asp-for="StarringsIds" class="form-select " asp-items="@ViewBag.Starrings" multiple="">
+            <label asp-for="DeleteStarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.DeleteStarringsIds) (Select the players to delete.)</label>
+            <select asp-for="DeleteStarringsIds" class="form-select " asp-items="@ViewBag.DeleteStarringsIds" multiple="">
             </select>
-            <span asp-validation-for="StarringsIds" class="text-danger"></span>
+            <span asp-validation-for="DeleteStarringsIds" class="text-danger"></span>
         </div>
 
 
 
         <div class="form-group">
-            <label asp-for="StarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.StarringsIds)</label>
-            <select asp-for="StarringsIds" class="form-select " asp-items="@ViewBag.Starrings" multiple="">
+            <label asp-for="AddStarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.AddStarringsIds) (Select the players to add.)</label>
+            <select asp-for="AddStarringsIds" class="form-select " asp-items="@ViewBag.AddStarringsIds" multiple="">
             </select>
-            <span asp-validation-for="StarringsIds" class="text-danger"></span>
+            <span asp-validation-for="AddStarringsIds" class="text-danger"></span>
         </div>
 
 
@@ -91,10 +105,7 @@
             <span asp-validation-for="IsActive" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="Image" class="form-label mt-4">Select Image</label>
-            <input asp-for="Image" type="file" class="form-control">
-        </div>
+
 
         <button type="submit" class="btn btn-primary mt-3">Update The Movie</button>
     </fieldset>
