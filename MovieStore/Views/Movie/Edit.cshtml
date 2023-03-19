@@ -34,6 +34,17 @@
             <span asp-validation-for="DirectorId" class="text-danger"></span>
         </div>
 
+
+
+        <div class="form-group">
+            <label asp-for="StarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.StarringsIds)</label>
+            <select asp-for="StarringsIds" class="form-select " asp-items="@ViewBag.Starrings" multiple="">
+            </select>
+            <span asp-validation-for="StarringsIds" class="text-danger"></span>
+        </div>
+
+
+
         <div class="form-group">
             <label asp-for="StarringsIds" class="form-label mt-4">@Html.DisplayNameFor(x=>x.StarringsIds)</label>
             <select asp-for="StarringsIds" class="form-select " asp-items="@ViewBag.Starrings" multiple="">

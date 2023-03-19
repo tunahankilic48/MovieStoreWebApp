@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿    using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MovieStore.Models.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,8 @@ namespace MovieStore.Models.ViewModels
         public MovieVM()
         {
             Starrings = new List<Starring>();
-            StarringsIds = new List<int>();
+            AddStarringsIds = new List<int>();
+            DeleteStarringsIds = new List<int>();
         }
         public int? Id { get; set; }
 
@@ -62,12 +63,21 @@ namespace MovieStore.Models.ViewModels
         public IFormFile? Image{ get; set; }
         [ValidateNever]
         public string? ImagePath { get; set; }
+
+
         [ValidateNever]
-        public List<int> StarringsIds { get; set; }
+        [Display(Name = "Starrings that can be added")]
+        public List<int> AddStarringsIds { get; set; }
+
+        [ValidateNever]
+        [Display(Name = "Current Starrings")]
+        public List<int> DeleteStarringsIds { get; set; }
 
         public Category? Category { get; set; }
         public Director? Director { get; set; }
         public Language? Language { get; set; }
+
+
 
         public List<Starring>? Starrings { get; set; }
     }
