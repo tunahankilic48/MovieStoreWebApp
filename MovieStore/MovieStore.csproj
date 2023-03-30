@@ -20,4 +20,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MovieStore.Application\MovieStore.Application.csproj" />
+  </ItemGroup>
+
 </Project>

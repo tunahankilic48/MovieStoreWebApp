@@ -1,31 +1,22 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using MovieStore.Models.Entities;
-using MovieStore.Models.ViewModels;
-using MovieStore.Repository.Abstract;
-using MovieStore.Validation;
+using MovieStore.Application.Models.DataTransferObjects.LanguageDTOs;
 
 namespace MovieStore.Controllers
 {
     public class LanguageController : Controller
     {
-        private readonly ILanguageRepository _repository;
+        private readonly Application.Services.LanguageService.ILanguageService _service;
         private readonly IMapper _mapper;
-        public LanguageController(ILanguageRepository categoryRepository, IMapper mapper)
+        public LanguageController(Application.Services.LanguageService.ILanguageService service, IMapper mapper)
         {
-            _repository = categoryRepository;
+            _service = service;
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<LanguageVM> languages = new List<LanguageVM>();
-            foreach (var item in _repository.GetAll())
-            {
-                languages.Add(_mapper.Map<LanguageVM>(item));
-            }
-            return View(languages);
+            return View(await _service.GetLanguages());
         }
 
         public IActionResult Create()
@@ -34,34 +25,26 @@ namespace MovieStore.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(LanguageVM model)
+        public IActionResult Create(CreateLanguageDTO model)
         {
             if (ModelState.IsValid)
             {
-                var newLanguage = _mapper.Map<Language>(model);
-                if (_repository.GetDefault(x => x.Name == newLanguage.Name).Count > 0)
-                {
-                    TempData["error"] = "The language already exist in the database.";
-                    return View(newLanguage);
-                }
-                TempData["success"] = "The category is added.";
-                _repository.Add(newLanguage);
+                _service.Create(model);
             }
-
             return View(model);
 
         }
 
         public IActionResult Delete(int id)
         {
-            return View(_mapper.Map<LanguageVM>(_repository.GetById(id)));
+            return View(_service.GetById(id));
         }
 
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _repository.Delete(id);
-            TempData["success"] = "Language is deleted successfully";
+            _service.Delete(id);
+
             return RedirectToAction("index");
         }
     }
