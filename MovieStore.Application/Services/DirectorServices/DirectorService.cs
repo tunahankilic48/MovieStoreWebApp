@@ -10,6 +10,7 @@ namespace MovieStore.Application.Services.DirectorServices
 {
     internal class DirectorService : IDirectorService
     {
+        // ToDo: yönetiline filmler dropboxa dolacak
         private readonly IDirectorRepository _directorRepository;
         private readonly IMapper _mapper;
 
@@ -45,9 +46,8 @@ namespace MovieStore.Application.Services.DirectorServices
                             select: x => new DirectorDetailsVM
                             {
                                 Id = x.Id,
-                                FirstName = x.FirstName,
-                                LastName = x.LastName,
-                                BirthDate = x.BirthDate,
+                                FullName = x.FirstName + " " + x.LastName,
+                                BirthDate = x.BirthDate != null ? ((DateTime)(x.BirthDate)).ToShortDateString() : null,
                                 Statu = x.Statu,
 
                             },
@@ -64,9 +64,8 @@ namespace MovieStore.Application.Services.DirectorServices
                 select: x => new DirectorVM()
                 {
                     Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    BirthDate = x.BirthDate,
+                    FullName = x.FirstName + " " + x.LastName,
+                    BirthDate = x.BirthDate != null ? ((DateTime)(x.BirthDate)).ToShortDateString() : null,
                     Statu = x.Statu
 
                 },

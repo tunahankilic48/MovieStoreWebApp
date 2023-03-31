@@ -10,29 +10,29 @@ using System.Xml.Linq;
 
 namespace MovieStore.Application.Models.ViewModels.MovieViewModels
 {
-    internal class MovieDetailsVM
+    public class MovieDetailsVM
     {
+        [Display(Name = "ID")]
         public int? Id { get; set; }
-
+        [Display(Name = "Name")]
         public string? Name { get; set; }
-
+        [Display(Name = "Description")]
         public string? Description { get; set; }
+        [Display(Name = "Category")]
         public string? CategoryName { get; set; }
-
+        [Display(Name = "Director")]
         public string? DirectorName { get; set; }
-
+        [Display(Name = "Release Date")]
         public DateTime? ReleaseDate { get; set; }
-
+        [Display(Name = "Runnin Time (min)")]
         public int? RunningTimeMin { get; set; }
-
+        [Display(Name = "Language")]
         public string? LanguageName { get; set; }
-
+        [Display(Name = "Price")]
         public decimal? Price { get; set; }
-
+        [Display(Name = "Stock")]
         public int? Stock { get; set; }
-
-
-
+        [Display(Name = "In Sale")]
         public bool? IsActive { get; set; }
 
 

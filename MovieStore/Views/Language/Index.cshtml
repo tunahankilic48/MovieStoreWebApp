@@ -23,6 +23,7 @@
                 <tr class="table-warning text-center">
                     <th scope="col">@Html.DisplayNameFor(x=>x.Id)</th>
                     <th scope="col">@Html.DisplayNameFor(x=>x.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Statu)</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                     <tr class="table-primary text-center align-middle">
                         <td>@item.Id</td>
                         <td>@item.Name</td>
+                        <td>@item.Statu</td>
                         <td>
                             <a class="btn btn-danger m-2" asp-controller="language" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
                         </td>

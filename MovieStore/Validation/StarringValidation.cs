@@ -7,11 +7,11 @@ namespace MovieStore.Validation
     {
         public StarringValidation()
         {
-            RuleFor(x => x.FirstName).NotEmpty().WithMessage("First name cannot be null.")
-                                     .MaximumLength(20).WithMessage("The maximum length of first name can be 20 characters");
+            //RuleFor(x => x.FirstName).NotEmpty().WithMessage("First name cannot be null.")
+            //                         .MaximumLength(20).WithMessage("The maximum length of first name can be 20 characters");
 
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last name cannot be null.")
-                                     .MaximumLength(30).WithMessage("The maximum length of last name can be 30 characters");                         
+            //RuleFor(x => x.LastName).NotEmpty().WithMessage("Last name cannot be null.")
+            //                         .MaximumLength(30).WithMessage("The maximum length of last name can be 30 characters");                         
         }
     }
 }

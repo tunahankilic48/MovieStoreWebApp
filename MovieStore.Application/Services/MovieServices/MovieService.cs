@@ -150,7 +150,7 @@ namespace MovieStore.Application.Services.MovieServices
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Description = x.Description,
+                    Description = x.Description.Length > 30 ? x.Description.Substring(0, 30) + "..." : x.Description,
                     ImagePath = x.ImagePath,
                     DirectorName = x.Director.FullName,
                     CategoryName = x.Category.Name,
@@ -181,6 +181,11 @@ namespace MovieStore.Application.Services.MovieServices
                 newMovie.ImagePath = model.ImagePath;
 
             return await _movieRepository.Update(newMovie);
+        }
+        // ToDo: Update ksımında doldurma alanları ayarlanacak
+        public Task<UpdateMovieDTO> UpdateMovie()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieStore.Application.Models.DataTransferObjects.CategoryDTOs
 {
-    internal class UpdateCategoryDTO
+    public class UpdateCategoryDTO
     {
         public int? Id { get; set; }
         public string? Name { get; set; }

@@ -10,6 +10,9 @@ namespace MovieStore.Application.Services.StarringServices
 {
     internal class StarringService : IStarringService
     {
+
+        // ToDo: Filmler gönderilecek
+        // ToDo: Statü yapılacak
         private readonly IStarringRepository _starringRepository;
         private readonly IMapper _mapper;
 
@@ -43,9 +46,8 @@ namespace MovieStore.Application.Services.StarringServices
                 select: x => new StarringDetailsVM
                 {
                     Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    BirthDate = x.BirthDate,
+                    FullName = x.FirstName + " " + x.LastName,
+                    BirthDate = x.BirthDate != null ? ((DateTime)(x.BirthDate)).ToShortDateString() : null,
                     Statu = x.Statu,
 
                 },
@@ -62,9 +64,8 @@ namespace MovieStore.Application.Services.StarringServices
                 select: x => new StarringVM
                 {
                     Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    BirthDate = x.BirthDate,
+                    FullName = x.FirstName + " " + x.LastName,
+                    BirthDate = x.BirthDate != null ? ((DateTime)(x.BirthDate)).ToShortDateString() : null,
                     Statu = x.Statu,
 
                 },

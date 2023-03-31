@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MovieStore.Application.Models.ViewModels.CategoryViewModels
 {
-    internal class CategoryVM
+    public class CategoryVM
     {
+        [Display(Name = "ID")]
         public int? Id { get; set; }
+
+        [Display(Name = "Name")]
         public string? Name { get; set; }
+
+        [Display(Name = "Description")]
         public string? Description { get; set; }
     }
 }

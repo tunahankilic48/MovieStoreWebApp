@@ -11,12 +11,13 @@ namespace MovieStore.Application.Models.ViewModels.LanguageViewModels
 {
     public class LanguageVM
     {
+        [Display(Name = "ID")]
         public int? Id { get; set; }
 
-        [Required(ErrorMessage = "Language name canot not be null.")]
-        [MaxLength(20, ErrorMessage = "Language name can be maximum 20 characters")]
         [Display(Name = "Name")]
         public string? Name { get; set; }
+
+        [Display(Name = "Statu")]
         public Status Statu { get; set; }
     }
 }

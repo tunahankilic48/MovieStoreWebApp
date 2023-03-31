@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieStore.Models.DataAccess.Mappings;
-using MovieStore.Models.Entities;
 
 namespace MovieStore.Models.DataAccess
 {
@@ -10,28 +8,28 @@ namespace MovieStore.Models.DataAccess
         {
         }
 
-        public DbSet<Movie> Movies{ get; set; }
-        public DbSet<Category> Categories{ get; set; }
-        public DbSet<Director> Directors{ get; set; }
-        public DbSet<Starring> Starrings{ get; set; }
-        public DbSet<Language> Languages{ get; set; }
+        //public DbSet<Movie> Movies{ get; set; }
+        //public DbSet<Category> Categories{ get; set; }
+        //public DbSet<Director> Directors{ get; set; }
+        //public DbSet<Starring> Starrings{ get; set; }
+        //public DbSet<Language> Languages{ get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new MovieMapping())
-                        .ApplyConfiguration(new CategoryMapping())
-                        .ApplyConfiguration(new DirectorMapping())
-                        .ApplyConfiguration(new LanguageMapping())
-                        .ApplyConfiguration(new StarringMapping());
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.ApplyConfiguration(new MovieMapping())
+        //                .ApplyConfiguration(new CategoryMapping())
+        //                .ApplyConfiguration(new DirectorMapping())
+        //                .ApplyConfiguration(new LanguageMapping())
+        //                .ApplyConfiguration(new StarringMapping());
                         
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
+        //public override int SaveChanges()
+        //{
+        //    return base.SaveChanges();
+        //}
 
     }
 }

@@ -1,20 +1,19 @@
 ﻿using MovieStore.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieStore.Application.Models.ViewModels.DirectorViewModels
 {
-    internal class DirectorVM
+    public class DirectorVM
     {
         public int? Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public DateTime? BirthDate { get; set; }
+
+        [Display(Name = "Birth Date")]
+        public string? BirthDate { get; set; }
+
+        [Display(Name = "Statu")]
         public Status Statu { get; set; }
 
+        [Display(Name = "Name")]
         public string FullName { get; set; }
     }
 }

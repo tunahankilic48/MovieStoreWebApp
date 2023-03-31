@@ -7,8 +7,9 @@ using MovieStore.Domain.Repositories;
 
 namespace MovieStore.Application.Services.LanguageService
 {
-    public class LanguageService : ILanguageService
+    internal class LanguageService : ILanguageService
     {
+        //ToDo: Statünün seçimi için veritaşıması yapılacak
         private readonly ILanguageRepository _languageRepository;
         private readonly IMapper _mapper;
         public LanguageService(ILanguageRepository languageRepository, IMapper mapper)
@@ -30,10 +31,10 @@ namespace MovieStore.Application.Services.LanguageService
             return await _languageRepository.Delete(deleteLanguage);
         }
 
-        public async Task<LanguageVM> GetById(int id)
+        public async Task<UpdateLanguageDTO> GetById(int id)
         {
             Language Language = await _languageRepository.GetDefault(x => x.Id == id);
-            return _mapper.Map<LanguageVM>(Language);
+            return _mapper.Map<UpdateLanguageDTO>(Language);
         }
 
         public async Task<List<LanguageVM>> GetLanguages()
@@ -51,6 +52,12 @@ namespace MovieStore.Application.Services.LanguageService
                 );
 
             return languages;
+        }
+
+        public async Task<bool> Update(UpdateLanguageDTO model)
+        {
+            Language language = _mapper.Map<Language>(model);
+            return await _languageRepository.Update(language);
         }
     }
 }

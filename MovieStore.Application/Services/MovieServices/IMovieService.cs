@@ -3,7 +3,7 @@ using MovieStore.Application.Models.ViewModels.MovieViewModels;
 
 namespace MovieStore.Application.Services.MovieServices
 {
-    internal interface IMovieService
+    public interface IMovieService
     {
         Task<bool> Create(CreateMovieDTO model);
         Task<bool> Update(UpdateMovieDTO model);
@@ -12,5 +12,6 @@ namespace MovieStore.Application.Services.MovieServices
         Task<List<MovieVM>> GetMovies();
         Task<MovieDetailsVM> GetMovieDetails(int id);
         Task<CreateMovieDTO> CreateMovie();
+        Task<UpdateMovieDTO> UpdateMovie();
     }
 }

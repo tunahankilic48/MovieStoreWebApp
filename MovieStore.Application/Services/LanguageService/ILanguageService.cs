@@ -7,7 +7,8 @@ namespace MovieStore.Application.Services.LanguageService
     {
         Task<bool> Create(CreateLanguageDTO model);
         Task<bool> Delete(int id);
-        Task<LanguageVM> GetById(int id);
+        Task<bool> Update(UpdateLanguageDTO model);
+        Task<UpdateLanguageDTO> GetById(int id);
         Task<List<LanguageVM>> GetLanguages();
     }
 }

@@ -1,10 +1,8 @@
-using MovieStore.Models.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using MovieStore.Repository.Abstract;
-using MovieStore.Repository.Concrete;
-using System.Reflection;
 using Microsoft.Extensions.FileProviders;
+using MovieStore.Models.DataAccess;
 using MovieStore.Models.Seed;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,11 +14,11 @@ builder.Services.AddDbContext<MovieDbContext>(x => x.UseSqlServer(builder.Config
 builder.Services.AddScoped<IMovieDbContext, MovieDbContext>(); // The program create MovieDbContext Object when encounter IMovieDbContext Interface
 
 
-builder.Services.AddTransient<IMovieRepository, MovieRepository>()
-                .AddTransient<ICategoryRepository, CategoryRepository>()
-                .AddTransient<IDirectorRepository, DirectorRepository>()
-                .AddTransient<IStarringRepository, StarringRepository>()
-                .AddTransient<ILanguageRepository, LanguageRepository>();
+//builder.Services.AddTransient<IMovieRepository, MovieRepository>()
+//                .AddTransient<ICategoryRepository, CategoryRepository>()
+//                .AddTransient<IDirectorRepository, DirectorRepository>()
+//                .AddTransient<IStarringRepository, StarringRepository>()
+//                .AddTransient<ILanguageRepository, LanguageRepository>();
 
 builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 

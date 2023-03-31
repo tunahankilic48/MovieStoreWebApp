@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieStore.Domain", "MovieS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieStore.Infrastructure", "MovieStore.Infrastructure\MovieStore.Infrastructure.csproj", "{33F54BCB-76B3-451F-A53D-288A0B25C510}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStore.Application", "MovieStore.Application\MovieStore.Application.csproj", "{5A9849F5-AB69-4D80-A1CB-4F399292E6DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieStore.Application", "MovieStore.Application\MovieStore.Application.csproj", "{5A9849F5-AB69-4D80-A1CB-4F399292E6DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

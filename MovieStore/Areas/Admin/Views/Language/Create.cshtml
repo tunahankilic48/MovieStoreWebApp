@@ -1,0 +1,16 @@
+﻿@model CreateLanguageDTO
+
+<h2 class="text-ligth mt-3">New Language</h2>
+
+<form asp-controller="language" asp-action="create" method="post">
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="Name" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Name)</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter Language Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Create The Language</button>
+    </fieldset>
+</form>
+<a class="btn btn-primary mt-3" asp-controller="language" asp-action="index">Back To List</a>

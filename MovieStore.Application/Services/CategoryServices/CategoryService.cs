@@ -9,6 +9,7 @@ namespace MovieStore.Application.Services.CategoryServices
 {
     internal class CategoryService : ICategoryService
     {
+        // ToDo: Statü göndermesi eklenecek
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
 
@@ -44,22 +45,30 @@ namespace MovieStore.Application.Services.CategoryServices
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Description = x.Description
+                    Description = x.Description.Length > 20 ? x.Description.Substring(0,50) : x.Description
                 },
                 where: x => x.Statu != Status.Passive && x.Statu != Status.Deleted,
-                orderby: x => x.OrderBy(x => x.Name),
-                include: null
+                orderby: x => x.OrderBy(x => x.Name)
                 );
 
             return categories;
 
         }
 
-        public async Task<CategoryVM> GetCategoryDetails(int id)
+        public async Task<CategoryDetailsVM> GetCategoryDetails(int id)
         {
-            Category category = await _categoryRepository.GetDefault(x => x.Id == id);
+            var category = await _categoryRepository.GetFilteredFirstOrDefault(
+                select: x => new CategoryDetailsVM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description
+                },
+                where: x => x.Statu != Status.Passive && x.Statu != Status.Deleted,
+                include: null
+                );
 
-            return _mapper.Map<CategoryVM>(category);
+            return category;
         }
 
         public async Task<bool> Update(UpdateCategoryDTO model)
