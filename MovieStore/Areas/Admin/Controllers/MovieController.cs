@@ -1,5 +1,4 @@
-﻿using AspNetCore;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.MovieDTOS;
 using MovieStore.Application.Services.CategoryServices;
 using MovieStore.Application.Services.DirectorServices;
@@ -9,6 +8,7 @@ using MovieStore.Application.Services.StarringServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
+    [Area("admin")]
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;

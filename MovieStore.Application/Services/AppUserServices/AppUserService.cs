@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using MovieStore.Application.Models.DataTransferObjects.AppUserDTOs;
 using MovieStore.Domain.Entities;
 using MovieStore.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieStore.Application.Services.AppUserServices
 {
@@ -34,7 +29,8 @@ namespace MovieStore.Application.Services.AppUserServices
                     Id = x.Id,
                     UserName = x.UserName,
                     Password = x.PasswordHash,
-                    Email = x.Email
+                    Email = x.Email,
+                    ImagePath = x.ImagePath,
                 },
                 where: x => x.UserName == userName
                 );
@@ -44,7 +40,8 @@ namespace MovieStore.Application.Services.AppUserServices
 
         public async Task<SignInResult> Login(LoginDTO model)
         {
-            return await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            return result;
         }
 
         public async Task Logout()
@@ -55,6 +52,9 @@ namespace MovieStore.Application.Services.AppUserServices
         public async Task<IdentityResult> Registor(RegistorDTO model)
         {
             AppUser user = _mapper.Map<AppUser>(model);
+
+            user.ImagePath = "/images/noImage.png";
+
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

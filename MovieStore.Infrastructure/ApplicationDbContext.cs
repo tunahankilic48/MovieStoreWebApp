@@ -5,7 +5,7 @@ using MovieStore.Infrastructure.EntityTypeConfig;
 
 namespace MovieStore.Infrastructure
 {
-    internal class ApplicationDbContext : IdentityDbContext<AppUser>
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

@@ -22,7 +22,7 @@ namespace MovieStore.Infrastructure.EntityTypeConfig
                 .HasColumnOrder(2);
 
             builder.Property(x => x.Description)
-                .HasMaxLength(250)
+                .HasColumnType("nvarchar(MAX)")
                 .IsUnicode(true)
                 .HasColumnOrder(3);
 

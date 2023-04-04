@@ -1,0 +1,47 @@
+﻿@model LoginDTO
+
+<div class="hold-transition login-page bg-dark">
+<div class="login-box">
+
+    <div class="card">
+        <div class="card-body login-card-body text-dark">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+                <form asp-controller="account" asp-action="login" asp-route-returnurl="@ViewData["returnUrl"]" method="post">
+                
+                <div class="input-group mb-4">
+                    <input asp-for="UserName" class="form-control" placeholder="User Name">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-4">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="">
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+
+            </form>
+
+            <p class="mb-1">
+                <a asp-controller="account" asp-action="forgotpassword">I forgot my password</a>
+            </p>
+            <p class="mb-0">
+                <a asp-controller="account" asp-action="registor">Register a new membership</a>
+            </p>
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+</div>
+<!-- /.login-box -->

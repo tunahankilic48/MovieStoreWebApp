@@ -4,6 +4,7 @@ using MovieStore.Application.Services.CategoryServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
+    [Area("admin")]
     public class CategoryController : Controller
     {
         // ToDo: Statü göndermesi eklenecek

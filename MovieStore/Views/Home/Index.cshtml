@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MovieVM>
+
+<div class="row d-flex justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="card m-3 col-lg-3 p-0">
+        <a class="nav-link" asp-area="admin" asp-controller="movie" asp-action="details">
+
+            <h3 class="card-header bg-warning">@item.Name</h3>
+
+            @if (!String.IsNullOrEmpty(item.ImagePath))
+            {
+                <img src="/Images/@item.ImagePath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+
+            }
+            else
+            {
+                <img src="/Images/noImage.png" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+            }
+
+            <ul class="list-group list-group-flush bg-primary">
+                <li class="list-group-item bg-primary border-bottom border-warning"><strong>@Html.DisplayNameFor(model => model.DirectorName):</strong> @item.DirectorName</li>
+                <li class="list-group-item bg-primary border-bottom border-warning">
+                    <strong>@Html.DisplayNameFor(model => model.CategoryName):</strong>
+        @item.CategoryName
+
+        </li>
+                <li class="list-group-item bg-primary border-bottom border-warning">
+                    <strong>@Html.DisplayNameFor(model => model.Price):</strong> @item.Price
+
+        </li>
+            </ul>
+
+            <div class="card-body bg-primary border-bottom border-warning">
+                <p class="card-text">
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        @item.Description
+                    }
+                </p>
+            </div>
+
+        </a>
+        </div>
+
+    }
+</div>

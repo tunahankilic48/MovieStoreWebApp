@@ -4,6 +4,7 @@ using MovieStore.Application.Services.StarringServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
+    [Area("admin")]
     public class StarringController : Controller
     {
         // ToDo: Filmler gönderilecek

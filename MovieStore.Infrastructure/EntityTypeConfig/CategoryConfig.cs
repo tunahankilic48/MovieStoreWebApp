@@ -19,7 +19,7 @@ namespace MovieStore.Infrastructure.EntityTypeConfig
 
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(true)
                 .HasColumnOrder(2);
 

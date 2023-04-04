@@ -4,6 +4,7 @@ using MovieStore.Application.Services.LanguageService;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
+    [Area("admin")]
     public class LanguageController : Controller
     {
         // ToDo: statü veri taşınması yapılacak

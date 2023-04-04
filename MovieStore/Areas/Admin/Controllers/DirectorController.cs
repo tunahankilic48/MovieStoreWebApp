@@ -4,6 +4,7 @@ using MovieStore.Application.Services.DirectorServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
+    [Area("admin")]
     public class DirectorController : Controller
     {
         // ToDo: Yönetilen Filmler dropbox a dolacak

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MovieStore.Infrastructure.Repositories
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
     {
 
         private readonly ApplicationDbContext _context;
