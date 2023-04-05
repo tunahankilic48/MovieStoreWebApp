@@ -68,21 +68,46 @@ namespace MovieStore.Application.Services.AppUserServices
         {
             AppUser user = await _repository.GetDefault(x => x.Id == model.Id);
 
+            if (model.UploadPath != null)
+            {
+                using var image = Image.Load(model.UploadPath.OpenReadStream());
+                image.Mutate(x => x.Resize(600, 560));
+                Guid guid = Guid.NewGuid();
+                var extension = Path.GetExtension(model.UploadPath.FileName).ToLower();
+                image.Save($"wwwroot/images/{guid}{extension}");
+
+                user.ImagePath = $"/images/{guid}{extension}";
+                await _userManager.UpdateAsync(user);
+            }
+
             if (model.Password != null)
             {
-                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
-                await _userManager.UpdateAsync(user);
+                if (model.Password == model.ConfirmPassword)
+                {
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+                    await _userManager.UpdateAsync(user);
+                }
             }
 
             if (model.Email != null)
             {
-                AppUser isEmailExist = await _userManager.FindByEmailAsync(model.Email);
+                AppUser isEmailExist = await _repository.GetDefault(x=>x.Email == model.Email);
 
                 if (isEmailExist == null)
                 {
                     await _userManager.SetEmailAsync(user, model.Email);
                 }
             }
+
+            if(model.UserName != null) 
+            {
+                var isUserNameExist = await _userManager.FindByNameAsync(model.UserName);
+                if (isUserNameExist == null)
+                {
+                    await _userManager.SetUserNameAsync(user, model.UserName);
+                }
+            }
+
         }
     }
 }

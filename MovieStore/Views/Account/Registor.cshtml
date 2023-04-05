@@ -8,8 +8,11 @@
     <div class="card">
         <div class="card-body register-card-body">
 
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+            
+        </div>
             <form asp-controller="account" asp-action="registor" method="post">
-                <div class="input-group mb-4">
+                <div class="input-group mt-4">
                     <input asp-for="UserName" class="form-control" placeholder="User Name">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -17,7 +20,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-4">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                <div class="input-group mt-4">
                     <input asp-for="Email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -25,7 +29,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-4">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="input-group mt-4">
                     <input asp-for="Password" type="password" class="form-control" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -33,7 +38,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-4">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="input-group mt-4">
                     <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -41,9 +47,10 @@
                         </div>
                     </div>
                 </div>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 
                 <div>
-                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Register</button>
                 </div>
             </form>
 

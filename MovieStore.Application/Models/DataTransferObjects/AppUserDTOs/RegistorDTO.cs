@@ -23,8 +23,10 @@ namespace MovieStore.Application.Models.DataTransferObjects.AppUserDTOs
         [MaxLength(20, ErrorMessage = "Password must be less than 20 characters.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage ="Passwords are not same.")]
-        public string ConfirmPassword { get; set; }
+        public string? ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Email cannot be null")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

@@ -83,17 +83,24 @@ namespace MovieStore.Controllers
         public async Task<IActionResult> Edit()
         {
 
-            return View();
+            return View(await _userService.GetByUserName(User.Identity.Name));
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateProfileDTO model)
         {
+            if(ModelState.IsValid)
+            {
+                 await _userService.UpdateUser(model);
+                await _userService.Logout();
+                
+                return RedirectToAction("login");
+                
+            }
             return View();
         }
 
         public async Task<IActionResult> Details()
         {
-            await _userService.GetByUserName(User.Identity.Name);
             return View(await _userService.GetByUserName(User.Identity.Name));
         }
     }
