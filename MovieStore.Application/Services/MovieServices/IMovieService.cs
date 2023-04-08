@@ -11,6 +11,7 @@ namespace MovieStore.Application.Services.MovieServices
         Task<UpdateMovieDTO> GetById(int id);
         Task<List<MovieVM>> GetMovies();
         Task<MovieDetailsVM> GetMovieDetails(int id);
+        Task<MovieDetailsVM> GetMovieDetailsForCustomers(int id);
         Task<CreateMovieDTO> CreateMovie();
         Task<UpdateMovieDTO> UpdateMovie();
     }

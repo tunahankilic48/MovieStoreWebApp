@@ -24,7 +24,7 @@ namespace MovieStore.Infrastructure.SeedData
                 if (!context.Categories.Any())
                 {
                     var categoryFaker = new Faker<Category>()
-                        .RuleFor(x => x.Name, y => y.Lorem.Word())
+                        .RuleFor(x => x.Name, y => y.Commerce.ProductName())
                         .RuleFor(x => x.Description, y => y.Lorem.Sentence(2))
                         .RuleFor(x => x.Statu, Status.Active);
                         
@@ -92,7 +92,8 @@ namespace MovieStore.Infrastructure.SeedData
                        .RuleFor(x => x.Stock, y => y.Random.Number(1000))
                        .RuleFor(x => x.IsActive, y => y.Random.Bool())
                        .RuleFor(x => x.Starrings, y => y.PickRandomParam(context.Starrings.ToList()))
-                       .RuleFor(x => x.Statu, Status.Active);
+                       .RuleFor(x => x.Statu, Status.Active)
+                       .RuleFor(x => x.ImagePath, y=>y.Image.PicsumUrl(600,560));
 
 
                     generatedMovies = movieFaker.Generate(40);

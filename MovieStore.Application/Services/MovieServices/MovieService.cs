@@ -134,10 +134,37 @@ namespace MovieStore.Application.Services.MovieServices
                    RunningTimeMin = x.RunningTimeMin,
                    LanguageName = x.Language.Name,
                    Stock = x.Stock,
-                   IsActive = x.IsActive
+                   IsActive = x.IsActive,
+                   Starrings = x.Starrings
+                   
                },
                where: x => x.Id == id,
-               include: x => x.Include(x => x.Category).Include(x => x.Director).Include(x => x.Language)
+               include: x => x.Include(x => x.Category).Include(x => x.Director).Include(x => x.Language).Include(x=>x.Starrings)
+               );
+
+            return movie;
+        }  
+        
+        public async Task<MovieDetailsVM> GetMovieDetailsForCustomers(int id)
+        {
+            MovieDetailsVM movie = await _movieRepository.GetFilteredFirstOrDefault(
+               select: x => new MovieDetailsVM
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+                   Description = x.Description,
+                   ImagePath = x.ImagePath,
+                   DirectorName = x.Director.FullName,
+                   CategoryName = x.Category.Name,
+                   Price = x.Price,
+                   ReleaseDate = x.ReleaseDate,
+                   RunningTimeMin = x.RunningTimeMin,
+                   LanguageName = x.Language.Name,
+                   Starrings = x.Starrings
+                   
+               },
+               where: x => x.Id == id,
+               include: x => x.Include(x => x.Category).Include(x => x.Director).Include(x => x.Language).Include(x=>x.Starrings)
                );
 
             return movie;

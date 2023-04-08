@@ -45,37 +45,26 @@
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <div class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                        <a class="btn btn-info mx-4 px-4" asp-action="login" asp-controller="account">Login</a>
-                        <a class=" btn btn-info px-4" asp-action="registor" asp-controller="account">Registor</a>
-
-                    </div>
-                }
-                else
-                {
                     <div class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                         <a class="btn btn-info mx-4 px-4" asp-area="default" asp-action="details" asp-controller="account">View Profile</a>
-                        <a class=" btn btn-info px-4" asp-area="default" asp-action="logout" asp-controller="account">Logout</a>
+                    <a class=" btn btn-info px-4" asp-area="default" asp-action="logout" asp-controller="account">Logout</a>
                     </div>
-                }
             </div>
         </nav>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper bg-dark">
-          
+
             <!-- Main content -->
             <div class="content">
                 <div class="container">
                     @RenderBody()
-                    
+
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
         </div>
-        
+
         <footer class="main-footer bg-dark">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">

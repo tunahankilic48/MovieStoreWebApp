@@ -12,20 +12,11 @@
         <div class="card m-3 col-lg-3 p-0">
 
             <h3 class="card-header bg-warning">@item.Name</h3>
-
-            @if (!String.IsNullOrEmpty(item.ImagePath))
-            {
-                <img src="/Images/@item.ImagePath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
-
-            }
-            else
-            {
-                <img src="/Images/noImage.png" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
-            }
+                <img src="@item.ImagePath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
 
             <ul class="list-group list-group-flush bg-primary">
-                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Director): @item.Director.FirstName @item.Director.LastName</li>
-                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Category): @item.Category.Name</li>
+                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.DirectorName): @item.DirectorName</li>
+                <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.CategoryName): @item.CategoryName</li>
                 <li class="list-group-item bg-primary border-bottom border-warning">@Html.DisplayNameFor(model => model.Price): @item.Price</li>
             </ul>
 
