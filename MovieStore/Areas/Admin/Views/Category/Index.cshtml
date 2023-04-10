@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CategoryVM>
+
+<div class="row">
+    <div class="col-lg-2 "></div>
+    <a class="btn btn-primary m-2 col-lg-2" asp-controller="Category" asp-action="Create">Create New Category</a>
+</div>
+<div class="row d-flex justify-content-center">
+
+    <div class="col-lg-8 ">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="table-warning text-center">
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Id)</th>
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(x=>x.Description)</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr class="table-primary text-center align-middle">
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a class="btn btn-info m-2" asp-controller="category" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
+                            <a class="btn btn-success m-2" asp-controller="category" asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                            <a class="btn btn-danger m-2" asp-controller="category" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>

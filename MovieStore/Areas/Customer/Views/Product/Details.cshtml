@@ -1,0 +1,126 @@
+﻿@model MovieDetailsVM
+
+<div class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper bg-dark">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>@Model.Name</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                                <li class="breadcrumb-item active">@Model.Name</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Default box -->
+                <div class="card card-solid">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <h3 class="d-inline-block d-sm-none">@Model.Name</h3>
+                                <div class="col-12">
+                                    <img src="@Model.ImagePath" class="product-image" alt=" Image">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <h3 class="my-3">@Model.Name</h3>
+                                <p>@Model.Description</p>
+
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>@Html.DisplayNameFor(x=>x.DirectorName)</td>
+                                                    <td>@Model.DirectorName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@Html.DisplayNameFor(x=>x.CategoryName)</td>
+                                                    <td>@Model.CategoryName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@Html.DisplayNameFor(x=>x.LanguageName)</td>
+                                                    <td>@Model.LanguageName</td>
+                                                </tr> 
+                                                <tr>
+                                                    <td>@Html.DisplayNameFor(x=>x.ReleaseDate)</td>
+                                                    <td>@Model.ReleaseDate</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@Html.DisplayNameFor(x=>x.RunningTimeMin)</td>
+                                                    <td>@Model.RunningTimeMin</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <hr>
+                                <h4>Starrings</h4>
+                                <div class="btn-group btn-group-toggle d-flex flex-wrap" data-toggle="buttons">
+                                    @foreach (var item in Model.Starrings)
+                                    {
+                                        <label class=" text-center border p-1 text-sm">
+                                            @item.FullName
+                                        </label>
+                                    }
+
+                                </div>
+
+                                <div class="bg-gray py-2 px-3 mt-4">
+                                    <h2 class="mb-0">
+                                        @Model.Price$
+                                    </h2>
+                                </div>
+                                <!--ToDo: favoriler ve sepet eklenecek satın alma yaptırılıcak-->
+                                <div class="mt-4">
+                                    <div class="btn btn-primary btn-lg btn-flat">
+                                        <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                        Add to Cart
+                                    </div>
+
+                                    <div class="btn btn-default btn-lg btn-flat">
+                                        <i class="fas fa-heart fa-lg mr-2"></i>
+                                        Add to Favorite
+                                    </div>
+                                </div>
+
+                               
+
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+</div>

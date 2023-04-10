@@ -1,0 +1,53 @@
+﻿@model UpdateProfileDTO
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Update User</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form asp-action="edit" asp-controller="account" method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="UserName">@Html.DisplayNameFor(x=>x.UserName)</label>
+                        <input asp-for="UserName" class="form-control">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">@Html.DisplayNameFor(x=>x.Email)</label>
+                        <input asp-for="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">@Html.DisplayNameFor(x=>x.Password)</label>
+                        <input asp-for="Password" class="form-control" value="">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">@Html.DisplayNameFor(x=>x.ConfirmPassword)</label>
+                        <input asp-for="ConfirmPassword" class="form-control" >
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UploadPath" class="form-label mt-4">Select Image</label>
+                        <input asp-for="UploadPath" type="file" class="form-control">
+                        <span asp-validation-for="UploadPath" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <a asp-controller="account" asp-action="details" class="btn btn-info m-2">Back To Profile</a>
+                    <button type="submit" class="btn btn-success">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

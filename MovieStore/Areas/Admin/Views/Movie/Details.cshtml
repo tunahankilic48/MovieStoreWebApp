@@ -1,0 +1,74 @@
+﻿@model MovieDetailsVM
+
+<h2 class="text-ligth mt-3">Movie Details</h2>
+
+@if (!String.IsNullOrEmpty(Model.ImagePath))
+{
+    <img src="/Images/@Model.ImagePath" class="d-block user-select-none" width="200" height="300" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+
+}
+else
+{
+    <img src="/Images/noImage.png" class="d-block user-select-none" width="200" height="300" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" />
+}
+
+
+<div class="form-group">
+    <label asp-for="Name" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Name)</label>
+    <input asp-for="Name" class="form-control" disabled>
+</div>
+
+<div class="form-group">
+    <label asp-for="Description" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Description)</label>
+    <input asp-for="Description" class="form-control" disabled />
+
+</div>
+
+<div class="form-group">
+    <label class="form-label mt-4">@Html.DisplayNameFor(x=>x.CategoryName)</label>
+    <input asp-for="CategoryName" class="form-control" disabled />
+</div>
+
+<div class="form-group">
+    <label asp-for="DirectorName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.DirectorName)</label>
+    <input asp-for="DirectorName" class="form-control" disabled />
+</div>
+
+@*<div class="form-group">
+    <label asp-for="Starrings" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Starrings)</label>
+    <select asp-for="Starrings" class="form-select " asp-items="@ViewBag.Starrings" multiple="" disabled>
+    </select>
+</div>*@
+
+<div class="form-group">
+    <label asp-for="ReleaseDate" class="form-label mt-4">@Html.DisplayNameFor(x=>x.ReleaseDate)</label>
+    <input type="date" asp-for="ReleaseDate" class="form-control" disabled>
+</div>
+
+<div class="form-group">
+    <label asp-for="RunningTimeMin" class="form-label mt-4">@Html.DisplayNameFor(x=>x.RunningTimeMin)</label>
+    <input asp-for="RunningTimeMin" class="form-control" disabled>
+</div>
+
+<div class="form-group">
+    <label asp-for="LanguageName" class="form-label mt-4">@Html.DisplayNameFor(x=>x.LanguageName)</label>
+    <input asp-for="LanguageName" class="form-control" disabled />
+</div>
+
+<div class="form-group">
+    <label asp-for="Price" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Price)</label>
+    <input type="text" asp-for="Price" class="form-control" disabled>
+</div>
+
+<div class="form-group">
+    <label asp-for="Stock" class="form-label mt-4">@Html.DisplayNameFor(x=>x.Stock)</label>
+    <input asp-for="Stock" class="form-control" disabled>
+</div>
+
+<div class="form-check">
+    <label asp-for="IsActive" class="form-check-label mt-4">Is Movie On Sale</label>
+    <input asp-for="IsActive" class="form-check-input mt-4" type="checkbox" value="" disabled>
+</div>
+
+
+<a class="btn btn-primary mt-3" asp-controller="Movie" asp-action="index">Back To List</a>
