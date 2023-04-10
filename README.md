@@ -42,10 +42,10 @@ This part of the project is considered as the admin screen of a website that sel
 
 
 
-Customer =>
-UserName = customer 
-Password = 1234
+####Customer =>
+- UserName = customer 
+- Password = 1234
 
-Admin => 
-UserName = admn1 
-Password = 1234
+####Admin => 
+- UserName = admn1 
+- Password = 1234
