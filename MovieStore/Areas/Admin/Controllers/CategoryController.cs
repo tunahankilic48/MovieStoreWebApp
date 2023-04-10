@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.CategoryDTOs;
 using MovieStore.Application.Services.CategoryServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
-    [Area("admin")]
+    [Area("admin"), Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         // ToDo: Statü göndermesi eklenecek
@@ -14,11 +15,12 @@ namespace MovieStore.Areas.Admin.Controllers
         {
             _service = service;
         }
+    
         public async Task<IActionResult> Index()
         {
             return View(await _service.GetCategories());
         }
-
+    
         public async Task<IActionResult> Create()
         {
             return View();
@@ -34,7 +36,7 @@ namespace MovieStore.Areas.Admin.Controllers
             }
             return View(model);
         }
-
+    
         public async Task<IActionResult> Edit(int id)
         {
             return View(await _service.GetById(id));
@@ -50,7 +52,7 @@ namespace MovieStore.Areas.Admin.Controllers
             }
             return View(model);
         }
-
+    
         public async Task<IActionResult> Delete(int id)
         {
             return View(await _service.GetById(id));
@@ -62,6 +64,7 @@ namespace MovieStore.Areas.Admin.Controllers
             await _service.Delete(id);
             return RedirectToAction("index");
         }
+    
         public async Task<IActionResult> Details(int id)
         {
             return View(await _service.GetCategoryDetails(id));

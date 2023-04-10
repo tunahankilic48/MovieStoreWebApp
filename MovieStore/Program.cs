@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Connection string will be taken from appsettings.json file
 
-builder.Services.AddIdentityCore<AppUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddIdentityCore<AppUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {

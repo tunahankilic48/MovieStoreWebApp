@@ -10,5 +10,7 @@ namespace MovieStore.Application.Services.AppUserServices
         Task Logout();
         Task UpdateUser(UpdateProfileDTO model);
         Task<UpdateProfileDTO> GetByUserName(string userName);
+        Task<IList<string>> GetUserRole(string userName);
+        Task<bool> IsAdmin(string userName);
     }
 }

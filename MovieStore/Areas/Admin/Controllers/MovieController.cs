@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.MovieDTOS;
 using MovieStore.Application.Services.CategoryServices;
 using MovieStore.Application.Services.DirectorServices;
@@ -8,7 +9,7 @@ using MovieStore.Application.Services.StarringServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
-    [Area("admin")]
+    [Area("admin"), Authorize(Roles = "Admin")]
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
@@ -48,6 +49,7 @@ namespace MovieStore.Areas.Admin.Controllers
             return View(model);
         }
         // ToDo: dropdownlar doldurulacak
+
         public async Task<IActionResult> Edit(int id)
         {
             return View(await _movieService.GetById(id));

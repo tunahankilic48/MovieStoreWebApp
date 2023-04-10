@@ -7,7 +7,7 @@
         <div class="card-body login-card-body text-dark">
             <p class="login-box-msg">Sign in to start your session</p>
 
-                <form asp-controller="account" asp-action="login" asp-route-returnurl="@ViewData["returnUrl"]" method="post">
+                <form asp-controller="account" asp-action="login" asp-route-returnUrl="@ViewData["returnUrl"]" method="post">
                 
                 <div class="input-group mt-4">
                     <input asp-for="UserName" class="form-control" placeholder="User Name">

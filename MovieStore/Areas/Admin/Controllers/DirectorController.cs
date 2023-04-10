@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.DirectorDTOs;
 using MovieStore.Application.Services.DirectorServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
-    [Area("admin")]
+    [Area("admin"), Authorize(Roles = "Admin")]
     public class DirectorController : Controller
     {
         // ToDo: Yönetilen Filmler dropbox a dolacak
@@ -16,12 +17,12 @@ namespace MovieStore.Areas.Admin.Controllers
             _service = service;
 
         }
-
+    
         public async Task<IActionResult> Index()
         {
             return View(await _service.GetDirectors());
         }
-
+    
         public async Task<IActionResult> Create()
         {
             return View();
@@ -39,7 +40,7 @@ namespace MovieStore.Areas.Admin.Controllers
             return View(newDirector);
 
         }
-
+    
         public async Task<IActionResult> Edit(int id)
         {
             return View(await _service.GetById(id));
@@ -55,7 +56,7 @@ namespace MovieStore.Areas.Admin.Controllers
             }
             return View(updatedDirector);
         }
-
+    
         public async Task<IActionResult> Delete(int id)
         {
             return View(await _service.GetById(id));
@@ -67,7 +68,7 @@ namespace MovieStore.Areas.Admin.Controllers
             await _service.Delete(id);
             return RedirectToAction("index");
         }
-
+    
         public async Task<IActionResult> Details(int id)
         {
 

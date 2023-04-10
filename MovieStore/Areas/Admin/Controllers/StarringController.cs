@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.StarringDTOs;
 using MovieStore.Application.Services.StarringServices;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
-    [Area("admin")]
+    [Area("admin"), Authorize(Roles = "Admin")]
     public class StarringController : Controller
     {
         // ToDo: Filmler gönderilecek
@@ -16,7 +17,6 @@ namespace MovieStore.Areas.Admin.Controllers
         {
             _service = service;
         }
-
         public async Task<IActionResult> Index()
         {
             return View(await _service.GetStarrings());

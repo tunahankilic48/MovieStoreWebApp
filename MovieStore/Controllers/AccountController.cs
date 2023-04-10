@@ -21,12 +21,14 @@ namespace MovieStore.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                if (await _userService.IsAdmin(User.Identity.Name))
+                    return RedirectToAction("index", "movie", new { Area = "admin" });
+                return RedirectToAction("index", "product", new { Area = "customer" });
             }
 
             return View();
         }
-        [HttpPost, AllowAnonymous]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public async Task<IActionResult> Registor(RegistorDTO model)
         {
             if(ModelState.IsValid)
@@ -50,15 +52,18 @@ namespace MovieStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = "/")
         {
+
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                if (await _userService.IsAdmin(User.Identity.Name))
+                    return RedirectToAction("index", "movie", new { Area = "admin" });
+                return RedirectToAction("index", "product", new { Area = "customer" });
             }
 
             ViewData["returnUrl"] = returnUrl;
             return View();
         }
-        [HttpPost, AllowAnonymous]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDTO model, string returnUrl)
         {
             if(ModelState.IsValid)
@@ -66,26 +71,27 @@ namespace MovieStore.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _userService.Login(model);
 
                 if(result.Succeeded)
-                    return Redirect(returnUrl);
+                {
+                    if (await _userService.IsAdmin(model.UserName))
+                        return RedirectToAction("index", "movie", new { Area = "admin" });
+                    return RedirectToAction("index", "product", new { Area = "customer" });
+                }
                 ModelState.AddModelError("", "Invalid login attempt");
             }
-
-            bool deneme = User.Identity.IsAuthenticated;
+            ViewData["returnUrl"] = returnUrl;
             return View(model);
         }
-
         public async Task<IActionResult> Logout()
         {
             await _userService.Logout();
             return RedirectToAction("Index", "Home");
         }
-
         public async Task<IActionResult> Edit()
         {
 
             return View(await _userService.GetByUserName(User.Identity.Name));
         }
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateProfileDTO model)
         {
             if(ModelState.IsValid)

@@ -109,5 +109,25 @@ namespace MovieStore.Application.Services.AppUserServices
             }
 
         }
+
+        public async Task<IList<string>> GetUserRole(string userName)
+        {
+            AppUser user = await _userManager.FindByNameAsync(userName);
+            var result = await _userManager.GetRolesAsync(user);
+            return result;
+        }
+
+        public async Task<bool> IsAdmin(string userName)
+        {
+            var roles = await GetUserRole(userName);
+
+            foreach (var role in roles)
+            {
+                if(role == "Admin")
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

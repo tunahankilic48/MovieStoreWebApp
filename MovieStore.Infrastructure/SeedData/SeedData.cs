@@ -1,5 +1,7 @@
 ﻿using Bogus;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MovieStore.Domain.Entities;
@@ -9,7 +11,7 @@ namespace MovieStore.Infrastructure.SeedData
 {
     public class SeedData
     {
-        public static void Seed(IApplicationBuilder app)
+        public async static Task Seed(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -27,8 +29,8 @@ namespace MovieStore.Infrastructure.SeedData
                         .RuleFor(x => x.Name, y => y.Commerce.ProductName())
                         .RuleFor(x => x.Description, y => y.Lorem.Sentence(2))
                         .RuleFor(x => x.Statu, Status.Active);
-                        
-                    
+
+
 
                     generatedCategories = categoryFaker.Generate(15);
 
@@ -64,7 +66,6 @@ namespace MovieStore.Infrastructure.SeedData
 
                 }
 
-                //ToDo: Seed data eklenirkenki karakter htasını çöz
 
                 if (!context.Languages.Any())
                 {
@@ -93,12 +94,66 @@ namespace MovieStore.Infrastructure.SeedData
                        .RuleFor(x => x.IsActive, y => y.Random.Bool())
                        .RuleFor(x => x.Starrings, y => y.PickRandomParam(context.Starrings.ToList()))
                        .RuleFor(x => x.Statu, Status.Active)
-                       .RuleFor(x => x.ImagePath, y=>y.Image.PicsumUrl(600,560));
+                       .RuleFor(x => x.ImagePath, y => y.Image.PicsumUrl(600, 560));
 
 
                     generatedMovies = movieFaker.Generate(40);
                     context.Movies.AddRange(generatedMovies);
                     context.SaveChanges();
+                }
+
+                if (!context.Roles.Any())
+                {
+                    var roleStore = new RoleStore<IdentityRole>(context);
+
+                    await roleStore.CreateAsync(new IdentityRole() { Name = "Admin" , NormalizedName = "Admin" });
+                    await roleStore.CreateAsync(new IdentityRole() { Name = "Manager" , NormalizedName = "Manager" });
+                    await roleStore.CreateAsync(new IdentityRole() { Name = "Customer", NormalizedName = "Customer"});
+                    context.SaveChanges();
+                }
+
+                if (!context.Users.Any())
+                {
+                   var passwordHasher = new PasswordHasher<AppUser>();
+
+                    AppUser adminUser = new AppUser
+                    {
+                        UserName = "admn1",
+                        NormalizedUserName = "admn1",
+                        Email = "admin@gmail.com",
+                        ImagePath = "/images/noImage.png",
+                        Statu = Status.Active,
+
+                    };
+
+                    var hashed = passwordHasher.HashPassword(adminUser, "1234");
+                    adminUser.PasswordHash = hashed;
+
+                    var userStore = new UserStore<AppUser>(context);
+                    
+                    await userStore.CreateAsync(adminUser);
+                    await userStore.AddToRoleAsync(adminUser, "Admin");
+                    await context.SaveChangesAsync();
+
+
+                    AppUser customerUser = new AppUser
+                    {
+                        UserName = "customer",
+                        NormalizedUserName ="customer",
+                        Email = "customer@gmail.com",
+                        ImagePath = "/images/noImage.png",
+                        Statu = Status.Active,
+                    };
+
+                    var hashedCustomer = passwordHasher.HashPassword(customerUser, "1234");
+                    customerUser.PasswordHash = hashedCustomer;
+
+                    var customerStore = new UserStore<AppUser>(context);
+
+                    await userStore.CreateAsync(customerUser);
+                    await userStore.AddToRoleAsync(customerUser, "Customer");
+                    await context.SaveChangesAsync();
+
                 }
             }
         }

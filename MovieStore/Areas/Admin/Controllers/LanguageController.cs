@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieStore.Application.Models.DataTransferObjects.LanguageDTOs;
 using MovieStore.Application.Services.LanguageService;
 
 namespace MovieStore.Areas.Admin.Controllers
 {
-    [Area("admin")]
+    [Area("admin"), Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         // ToDo: statü veri taşınması yapılacak
@@ -19,7 +20,6 @@ namespace MovieStore.Areas.Admin.Controllers
         {
             return View(await _service.GetLanguages());
         }
-
         public async Task<IActionResult> Create()
         {
             return View();
@@ -35,7 +35,6 @@ namespace MovieStore.Areas.Admin.Controllers
             return View(model);
 
         }
-
         public async Task<IActionResult> Edit(int id)
         {
             return View(await _service.GetById(id));
@@ -51,7 +50,6 @@ namespace MovieStore.Areas.Admin.Controllers
             return View(model);
 
         }
-
         public async Task<IActionResult> Delete(int id)
         {
             return View(await _service.GetById(id));
